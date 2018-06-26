@@ -1,0 +1,82 @@
+h1 {
+  font-size: 150px;
+  text-align: center;
+  color: indigo;
+  font-family: "Fredericka the Great", cursive;
+  margin: 0 auto;
+}
+
+body {
+  text-align: center;
+  align-content: center;
+  font-family: "IM Fell English SC", serif;
+  background-color: aliceblue;
+}
+
+h2 {
+  font-family: "Black And White Picture", sans-serif;
+  font-size: 28px;
+  color: saddlebrown;
+}
+#info {
+  font-size: 24px;
+  font-family: "IM Fell English SC", serif;
+
+  color: mediumturquoise;
+}
+
+.wrapper {
+  height: auto !important;
+  height: 100%;
+
+  /* Box-model */
+  min-height: 100%;
+
+  /* Positioning */
+  margin: 0 auto -100px;
+  align-content: center;
+}
+.container {
+  /* Box-model */
+  width: 100%;
+  max-width: 960px;
+  /* Positioning */
+  margin: 0 auto;
+  padding-top: 30px;
+  clear: both;
+  line-height: 30px;
+}
+
+#leftside,
+#rightside {
+  float: left;
+  margin: 0 auto;
+  padding-left: 40px;
+}
+
+#leftside {
+  margin-top: 30px;
+  padding-right: 80px;
+}
+
+#rightside {
+  font-size: 22px;
+  text-align: left;
+}
+
+#img {
+  height: 250px;
+  width: 300px;
+}
+
+button {
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 24px;
+  color: gold;
+  background-color: cornflowerblue;
+}
+
+.text {
+  color: slategray;
+}

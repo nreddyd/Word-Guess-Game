@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Black+And+White+Picture|Fredericka+the+Great|IM+Fell+English+SC" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="assets/javascript/game.js"></script>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1> Hangman</h1>
+        <br>
+        <div class="container">
+            <h2> PRESS ANY KEY TO GET STARTED </h2>
+            <p id="info"> The image on the left side shows the national animal of the country.
+                <br>Guess the Country Name!!!</p>
+            <div id="leftside">
+                <img id="img" src="http://www.coolmath-games.com/sites/cmatgame/files/hangman.png">
+            </div>
+            <div id="rightside">
+
+                <br>
+
+                <div class="text"> Number of Wins :
+                    <span id="numofwins"></span>
+                </div>
+                <br>
+
+                <div class="text"> current word
+                    <br>
+                    <span id="currentword"></span>
+                </div>
+                <br>
+
+                <div class="text"> Number of guesses remaining :
+                    <span id="numberofguesses"></span>
+                </div>
+                <br>
+
+                <div class="text"> Letters already guessed
+                    <span id="lettersguessed"></span>
+
+                </div>
+                <br>
+                <br>
+                <button class="reset">
+                    Reset
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
