@@ -15,7 +15,7 @@
 └── index.html
 ```
 
-The Hangman game is built to guess the country name based on the national animal image of that country.
+The Hangman game is built to guess the country name based on the national animal image of that country shown in the screen.
 
 Press any key to start the game.
 

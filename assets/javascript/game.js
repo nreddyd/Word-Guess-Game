@@ -68,28 +68,28 @@ $(document).ready(function() {
 
       // displays the image based on the country selected
       function changeimage() {
-        if (hangman.randomcountry == countries[0]) {
+        if (hangman.randomcountry === countries[0]) {
           document.getElementById("img").src =
             "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Bengal_Tiger_Karnataka.jpg/150px-Bengal_Tiger_Karnataka.jpg";
-        } else if (hangman.randomcountry == countries[1]) {
+        } else if (hangman.randomcountry === countries[1]) {
           document.getElementById("img").src =
             "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/American_Beaver.jpg/150px-American_Beaver.jpg";
-        } else if (hangman.randomcountry == countries[2]) {
+        } else if (hangman.randomcountry === countries[2]) {
           document.getElementById("img").src =
             "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Haliaeetus_leucocephalus.jpeg/150px-Haliaeetus_leucocephalus.jpeg";
-        } else if (hangman.randomcountry == countries[3]) {
+        } else if (hangman.randomcountry === countries[3]) {
           document.getElementById("img").src =
             "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Giant_Panda_2004-03-2.jpg/150px-Giant_Panda_2004-03-2.jpg";
-        } else if (hangman.randomcountry == countries[4]) {
+        } else if (hangman.randomcountry === countries[4]) {
           document.getElementById("img").src =
             "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Cygnus_olor_2_%28Marek_Szczepanek%29.jpg/150px-Cygnus_olor_2_%28Marek_Szczepanek%29.jpg";
-        } else if (hangman.randomcountry == countries[5]) {
+        } else if (hangman.randomcountry === countries[5]) {
           document.getElementById("img").src =
             "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Red_kangaroo_-_melbourne_zoo.jpg/150px-Red_kangaroo_-_melbourne_zoo.jpg";
-        } else if (hangman.randomcountry == countries[6]) {
+        } else if (hangman.randomcountry === countries[6]) {
           document.getElementById("img").src =
             "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Coq-gaulois-dore.JPG/150px-Coq-gaulois-dore.JPG";
-        } else if (hangman.randomcountry == countries[7]) {
+        } else if (hangman.randomcountry === countries[7]) {
           document.getElementById("img").src =
             "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/European_Brown_Bear.jpg/150px-European_Brown_Bear.jpg";
         }
@@ -153,12 +153,12 @@ $(document).ready(function() {
       // check the random country and the current word are same
     } else if (!hangman.compare()) {
       // if they are not same check if the number of guesses is greater than 0
-      if (hangman.numberofguesses > 0) {
+      if (hangman.numberofguesses >= 1) {
         var isguessed = hangman.inputalreadyguessed(input);
         // if the inout is already guessed
         if (!isguessed) {
           for (var i = 0; i < hangman.randomcountry.length; i++) {
-            if (input == hangman.randomcountry[i]) {
+            if (input === hangman.randomcountry[i]) {
               hangman.currentword[i] = input;
               // check if the updated current word is same as the random country selected
               if (hangman.compare()) {
