@@ -17,12 +17,12 @@
 
 The Hangman game is built to guess the country name based on the national animal image of that country.
 
-Press any key to start the game. 
+Press any key to start the game.
 
-You can make upto 5 guesses to win the round.
+You can make upto 5 guesses to win each round.
 
-Once you guess the word correctly the count of wins increases and a new animal would be displayed to guess the country name.
+Once you guess the country correctly the count of wins increases and a new animal would be displayed to guess the country name.
 
-Even if you miss the game you still get a new animal displayed to guess the country name.
+Even if you loose the round you still get a new animal displayed to guess the country name. But the number of wins will not be incremented.
 
-Press reset button to start a new game with 0  Number of Wins count.
+Press reset button to start a new game with Number of Wins = 0 count.

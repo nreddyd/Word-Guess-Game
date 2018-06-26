@@ -42,12 +42,11 @@ $(document).ready(function() {
   var isStart = true;
   var audioElement = document.createElement("audio");
 
-  // document.getElementById("numofwins").innerHTML = numofwins;
-
   Array.prototype.randomElement = function() {
     return this[Math.floor(Math.random() * this.length)];
   };
 
+  // Hangman Object
   var hangman = {
     numofwins: 0,
     numberofguesses: 5,
@@ -55,19 +54,19 @@ $(document).ready(function() {
     randomcountry: [],
     currentword: [],
 
+    // select a new country and reset the number of guesses, letters guessed and the current word
     reset: function() {
       var hangman = this;
-      console.log("inside reset");
       isStart = false;
       this.numberofguesses = 5;
       this.lettersguesses = [];
       this.currentword = [];
       this.randomcountry = countries.randomElement();
-      console.log(this.randomcountry);
       for (var i = 0; i < this.randomcountry.length; i++) {
         this.currentword[i] = "_";
       }
 
+      // displays the image based on the country selected
       function changeimage() {
         if (hangman.randomcountry == countries[0]) {
           document.getElementById("img").src =
@@ -97,7 +96,7 @@ $(document).ready(function() {
       }
 
       changeimage();
-
+      // update the new values in the html
       document.getElementById(
         "numberofguesses"
       ).innerHTML = this.numberofguesses;
@@ -105,6 +104,8 @@ $(document).ready(function() {
       document.getElementById("lettersguessed").innerHTML = this.lettersguesses;
     },
 
+    // function to return true if the input letter is  already guessed
+    // return false if the input is a new and not guessed previously
     inputalreadyguessed: function(input) {
       for (i = 0; i < this.lettersguesses.length; i++) {
         if (input === this.lettersguesses[i]) {
@@ -115,6 +116,9 @@ $(document).ready(function() {
       return false;
     },
 
+    // function to compare the current word and the random country selected
+    // return true if they are same.
+    //return false if not same.
     compare: function() {
       for (var i = 0; i < this.currentword.length; i++) {
         if (this.currentword[i] != this.randomcountry[i]) {
@@ -125,6 +129,7 @@ $(document).ready(function() {
     }
   };
 
+  // reset all the hangman values when reset button is clicked
   $(".reset").on("click", function() {
     hangman.numofwins = 0;
     document.getElementById("numofwins").innerHTML = hangman.numofwins;
@@ -132,22 +137,30 @@ $(document).ready(function() {
     hangman.reset();
   });
 
+  // get the input letter on key press
   document.onkeyup = function(event) {
     input = event.key.toUpperCase();
     var isrightguess = false;
 
+    // initialise all the hangman variables at the begining
     if (isStart) {
       hangman.reset();
     }
+
+    // if inout is not a alphabet do not take it as input
     if (letters.indexOf(input) == -1) {
       alert("You have to input a letter");
+      // check the random country and the current word are same
     } else if (!hangman.compare()) {
+      // if they are not same check if the number of guesses is greater than 0
       if (hangman.numberofguesses > 0) {
         var isguessed = hangman.inputalreadyguessed(input);
+        // if the inout is already guessed
         if (!isguessed) {
           for (var i = 0; i < hangman.randomcountry.length; i++) {
             if (input == hangman.randomcountry[i]) {
               hangman.currentword[i] = input;
+              // check if the updated current word is same as the random country selected
               if (hangman.compare()) {
                 hangman.numofwins++;
                 audioElement.setAttribute(
@@ -166,6 +179,7 @@ $(document).ready(function() {
               isrightguess = true;
             }
           }
+          // decrement the number of guesses only if it is not the right guess
           if (!isrightguess) {
             hangman.lettersguesses += input;
             document.getElementById("lettersguessed").innerHTML =
@@ -179,6 +193,7 @@ $(document).ready(function() {
               hangman.lettersguesses;
           }
         }
+        // if the number of guesses reaches 0 and the current word and the random country are not same
       } else {
         audioElement.setAttribute("src", "assets/music/loose.mp3");
         audioElement.play();
