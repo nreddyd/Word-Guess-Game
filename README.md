@@ -1,12 +1,11 @@
 # Word-Guess-Game
 
-Description:
---------------
+## Description:
 
 The Hangman game is built to guess the country name based on the national animal image of that country shown in the screen.
 
-Instructions : 
---------------
+## Instructions :
+
 Use the below link to play the game.
 
 https://nreddyd.github.io/Word-Guess-Game/
@@ -21,8 +20,7 @@ Even if you loose the round you still get a new animal displayed to guess the co
 
 Press reset button to start a new game with Number of Wins = 0 count.
 
-##File Structure :
--------------------
+## ##File Structure :
 
 ```
 ├── assets
@@ -36,5 +34,3 @@ Press reset button to start a new game with Number of Wins = 0 count.
 |     └── game.js
 └── index.html
 ```
-
-

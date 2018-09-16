@@ -49,6 +49,7 @@ $(document).ready(function() {
   // Hangman Object
   var hangman = {
     numofwins: 0,
+    numoflosses: 0,
     numberofguesses: 5,
     lettersguesses: [],
     randomcountry: [],
@@ -132,7 +133,10 @@ $(document).ready(function() {
   // reset all the hangman values when reset button is clicked
   $(".reset").on("click", function() {
     hangman.numofwins = 0;
+    hangman.numoflosses = 0;
     document.getElementById("numofwins").innerHTML = hangman.numofwins;
+    document.getElementById("numooflosses").innerHTML = hangman.numoflosses;
+
     isStart = true;
     hangman.reset();
   });
@@ -153,7 +157,7 @@ $(document).ready(function() {
       // check the random country and the current word are same
     } else if (!hangman.compare()) {
       // if they are not same check if the number of guesses is greater than 0
-      if (hangman.numberofguesses >= 1) {
+      if (hangman.numberofguesses > 1) {
         var isguessed = hangman.inputalreadyguessed(input);
         // if the inout is already guessed
         if (!isguessed) {
@@ -162,6 +166,7 @@ $(document).ready(function() {
               hangman.currentword[i] = input;
               // check if the updated current word is same as the random country selected
               if (hangman.compare()) {
+                alert("You Won");
                 hangman.numofwins++;
                 audioElement.setAttribute(
                   "src",
@@ -187,18 +192,38 @@ $(document).ready(function() {
             hangman.numberofguesses--;
             document.getElementById("numberofguesses").innerHTML =
               hangman.numberofguesses;
-          } else {
-            hangman.lettersguesses += input;
-            document.getElementById("lettersguessed").innerHTML =
-              hangman.lettersguesses;
           }
         }
         // if the number of guesses reaches 0 and the current word and the random country are not same
       } else {
-        audioElement.setAttribute("src", "assets/music/loose.mp3");
-        audioElement.play();
-        hangman.start = true;
-        hangman.reset();
+        for (var i = 0; i < hangman.randomcountry.length; i++) {
+          if (input === hangman.randomcountry[i]) {
+            hangman.currentword[i] = input;
+            // check if the updated current word is same as the random country selected
+            if (hangman.compare()) {
+              hangman.numofwins++;
+              document.getElementById("numofwins").innerHTML =
+                hangman.numofwins;
+              audioElement.setAttribute(
+                "src",
+                "assets/music/Correct-answer.mp3"
+              );
+              audioElement.play();
+              hangman.start = true;
+              hangman.reset();
+              // exit();
+            } else {
+              alert("You Lost");
+              hangman.numoflosses++;
+              document.getElementById("numooflosses").innerHTML =
+                hangman.numoflosses;
+              audioElement.setAttribute("src", "assets/music/loose.mp3");
+              audioElement.play();
+              hangman.start = true;
+              hangman.reset();
+            }
+          }
+        }
       }
     }
   };
