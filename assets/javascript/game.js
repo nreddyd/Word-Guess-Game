@@ -135,7 +135,7 @@ $(document).ready(function() {
     hangman.numofwins = 0;
     hangman.numoflosses = 0;
     document.getElementById("numofwins").innerHTML = hangman.numofwins;
-    document.getElementById("numooflosses").innerHTML = hangman.numoflosses;
+    document.getElementById("numoflosses").innerHTML = hangman.numoflosses;
 
     isStart = true;
     hangman.reset();
@@ -144,6 +144,7 @@ $(document).ready(function() {
   // get the input letter on key press
   document.onkeyup = function(event) {
     input = event.key.toUpperCase();
+    // enter = event.keyCode ? eevent.keyCode : event.which;
     var isrightguess = false;
 
     // initialise all the hangman variables at the begining
@@ -152,76 +153,53 @@ $(document).ready(function() {
     }
 
     // if inout is not a alphabet do not take it as input
-    if (letters.indexOf(input) == -1) {
+    if (letters.indexOf(input) == -1 && event.keyCode != 13) {
       alert("You have to input a letter");
-      // check the random country and the current word are same
-    } else if (!hangman.compare()) {
-      // if they are not same check if the number of guesses is greater than 0
-      if (hangman.numberofguesses > 1) {
-        var isguessed = hangman.inputalreadyguessed(input);
-        // if the inout is already guessed
-        if (!isguessed) {
-          for (var i = 0; i < hangman.randomcountry.length; i++) {
-            if (input === hangman.randomcountry[i]) {
-              hangman.currentword[i] = input;
-              // check if the updated current word is same as the random country selected
-              if (hangman.compare()) {
-                alert("You Won");
-                hangman.numofwins++;
-                audioElement.setAttribute(
-                  "src",
-                  "assets/music/Correct-answer.mp3"
-                );
-                audioElement.play();
-                document.getElementById("numofwins").innerHTML =
-                  hangman.numofwins;
-                isStart = true;
-                hangman.reset();
-                exit();
-              }
-              document.getElementById("currentword").innerHTML =
-                hangman.currentword;
-              isrightguess = true;
-            }
-          }
-          // decrement the number of guesses only if it is not the right guess
-          if (!isrightguess) {
-            hangman.lettersguesses += input;
-            document.getElementById("lettersguessed").innerHTML =
-              hangman.lettersguesses;
-            hangman.numberofguesses--;
-            document.getElementById("numberofguesses").innerHTML =
-              hangman.numberofguesses;
-          }
-        }
-        // if the number of guesses reaches 0 and the current word and the random country are not same
-      } else {
+    } else {
+      if (event.keyCode === 13) {
+        exit();
+      }
+      var isguessed = hangman.inputalreadyguessed(input);
+      // if the inout is already guessed
+      if (!isguessed) {
         for (var i = 0; i < hangman.randomcountry.length; i++) {
           if (input === hangman.randomcountry[i]) {
             hangman.currentword[i] = input;
             // check if the updated current word is same as the random country selected
             if (hangman.compare()) {
               hangman.numofwins++;
-              document.getElementById("numofwins").innerHTML =
-                hangman.numofwins;
               audioElement.setAttribute(
                 "src",
                 "assets/music/Correct-answer.mp3"
               );
               audioElement.play();
-              hangman.start = true;
+              document.getElementById("numofwins").innerHTML =
+                hangman.numofwins;
+
+              // isStart = true;
               hangman.reset();
               // exit();
-            } else {
-              alert("You Lost");
-              hangman.numoflosses++;
-              document.getElementById("numooflosses").innerHTML =
-                hangman.numoflosses;
-              audioElement.setAttribute("src", "assets/music/loose.mp3");
-              audioElement.play();
-              hangman.start = true;
-              hangman.reset();
             }
+            document.getElementById("currentword").innerHTML =
+              hangman.currentword;
+            isrightguess = true;
+          }
+        }
+        // decrement the number of guesses only if it is not the right guess
+        if (!isrightguess) {
+          hangman.lettersguesses += input;
+          document.getElementById("lettersguessed").innerHTML =
+            hangman.lettersguesses;
+          hangman.numberofguesses--;
+          document.getElementById("numberofguesses").innerHTML =
+            hangman.numberofguesses;
+          if (hangman.numberofguesses === 0) {
+            hangman.numoflosses++;
+            document.getElementById("numoflosses").innerHTML =
+              hangman.numoflosses;
+            audioElement.setAttribute("src", "assets/music/loose.mp3");
+            audioElement.play();
+            hangman.reset();
           }
         }
       }
